@@ -3,31 +3,31 @@ package com.example.observableweb;
 public class CustomData {
 
 
-    private String whatever;
-    private int i;
+    private String text;
+    private int counter;
 
     public CustomData() {
     }
 
-    public CustomData(String whatever, int i) {
+    public CustomData(String text, int counter) {
 
-        this.whatever = whatever;
-        this.i = i;
+        this.text = text;
+        this.counter = counter;
     }
 
-    public String getWhatever() {
-        return whatever;
+    public String getText() {
+        return text;
     }
 
-    public void setWhatever(String whatever) {
-        this.whatever = whatever;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public int getI() {
-        return i;
+    public int getCounter() {
+        return counter;
     }
 
-    public void setI(int i) {
-        this.i = i;
+    public void setCounter(int counter) {
+        this.counter = counter;
     }
 }
