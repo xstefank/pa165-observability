@@ -6,6 +6,7 @@ import io.micrometer.core.instrument.Timer;
 import io.micrometer.observation.Observation;
 import io.micrometer.observation.ObservationRegistry;
 import io.micrometer.observation.ObservationTextPublisher;
+import io.micrometer.observation.annotation.Observed;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -60,6 +61,12 @@ public class AvengerController {
         } finally {
             observation.stop();
         }
+    }
+
+    @GetMapping("/observe6")
+    @Observed(name = "my.observation")
+    public void observe6() {
+        doSomeWorkHere();
     }
 
     private void doSomeWorkHere() {
