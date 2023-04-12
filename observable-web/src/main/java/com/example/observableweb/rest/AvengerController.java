@@ -52,6 +52,7 @@ public class AvengerController {
     public void observe5() {
         Observation observation = Observation.start("my.operation", observationRegistry);
         try (Observation.Scope scope = observation.openScope()) {
+            observation.event(Observation.Event.of("test.event", "something happened"));
             doSomeWorkHere();
         } catch (Exception e) {
             observation.error(e);
