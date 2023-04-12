@@ -1,9 +1,11 @@
 package com.example.observableweb.rest;
 
+import com.example.observableweb.observation.SimpleHandler;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
 import io.micrometer.observation.Observation;
 import io.micrometer.observation.ObservationRegistry;
+import io.micrometer.observation.ObservationTextPublisher;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,6 +39,26 @@ public class AvengerController {
         Timer.Sample timer = Timer.start(meterRegistry);
         doSomeWorkHere();
         timer.stop(Timer.builder("my.timer").register(meterRegistry));
+    }
+
+    @GetMapping("/observe4")
+    public void observe4() {
+        Observation.Context context = new Observation.Context().put(String.class, "test-value");
+        Observation.createNotStarted("test.context", () -> context, observationRegistry)
+            .observe(this::doSomeWorkHere);
+    }
+
+    @GetMapping("/observe5")
+    public void observe5() {
+        Observation observation = Observation.start("my.operation", observationRegistry);
+        try (Observation.Scope scope = observation.openScope()) {
+            doSomeWorkHere();
+        } catch (Exception e) {
+            observation.error(e);
+            throw e;
+        } finally {
+            observation.stop();
+        }
     }
 
     private void doSomeWorkHere() {

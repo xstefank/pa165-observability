@@ -15,5 +15,4 @@ public class DemoApplication {
 	public CustomEndpoint customEndpoint() {
 		return new CustomEndpoint();
 	}
-
 }
