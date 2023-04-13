@@ -4,7 +4,7 @@ import io.micrometer.observation.Observation;
 import io.micrometer.observation.ObservationHandler;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class SimpleHandler implements ObservationHandler<Observation.Context> {
 
     @Override
