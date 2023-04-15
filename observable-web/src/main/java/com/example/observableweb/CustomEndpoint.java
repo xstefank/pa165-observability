@@ -3,7 +3,6 @@ package com.example.observableweb;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;
-import org.springframework.boot.actuate.endpoint.web.annotation.WebEndpoint;
 import org.springframework.http.MediaType;
 
 @Endpoint(id = "data")

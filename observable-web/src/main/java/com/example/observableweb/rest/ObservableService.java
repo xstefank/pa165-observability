@@ -1,22 +1,20 @@
 package com.example.observableweb.rest;
 
-import com.example.observableweb.observation.SimpleHandler;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
 import io.micrometer.observation.Observation;
 import io.micrometer.observation.ObservationRegistry;
-import io.micrometer.observation.ObservationTextPublisher;
 import io.micrometer.observation.annotation.Observed;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class AvengerController {
+public class ObservableService {
 
     private final ObservationRegistry observationRegistry;
     private final MeterRegistry meterRegistry;
 
-    public AvengerController(ObservationRegistry observationRegistry, MeterRegistry meterRegistry) {
+    public ObservableService(ObservationRegistry observationRegistry, MeterRegistry meterRegistry) {
         this.observationRegistry = observationRegistry;
         this.meterRegistry = meterRegistry;
     }
@@ -67,6 +65,12 @@ public class AvengerController {
     @Observed(name = "my.observation")
     public void observe6() {
         doSomeWorkHere();
+    }
+
+    @GetMapping("/observe7")
+    public void observe7() {
+        Observation.createNotStarted("to.ignore", observationRegistry)
+                .observe(this::doSomeWorkHere);
     }
 
     private void doSomeWorkHere() {

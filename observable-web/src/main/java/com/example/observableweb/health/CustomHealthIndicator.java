@@ -10,7 +10,8 @@ import java.util.Random;
 public class CustomHealthIndicator implements HealthIndicator {
     @Override
     public Health health() {
-        return check() ? Health.up().build() : Health.down(new Exception("failed health indicator")).build();
+        return check() ? Health.up().withDetail("key", "value").build() :
+            Health.down(new Exception("failed health indicator")).build();
     }
 
     private boolean check() {
