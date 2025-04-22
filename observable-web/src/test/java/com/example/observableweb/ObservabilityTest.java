@@ -32,6 +32,7 @@ public class ObservabilityTest {
 
     @Test
     void testObservation() {
+        // invoke tested service method that creates the observation
         service.observeMethod();
         TestObservationRegistryAssert.assertThat(registry)
             .hasObservationWithNameEqualTo("observeTest")
