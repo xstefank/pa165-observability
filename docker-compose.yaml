@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  prometheus:
+    image: docker.io/prom/prometheus:v3.3.0
+    container_name: prometheus
+    network_mode: host
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:Z
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+
+  grafana:
+    image: docker.io/grafana/grafana:11.6.0
+    container_name: grafana
+    network_mode: host
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+
+  zipkin:
+    image: docker.io/openzipkin/zipkin:3.5.0
+    container_name: zipkin
+    network_mode: host
+  
