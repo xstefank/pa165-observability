@@ -82,7 +82,7 @@ public class ObservableService {
     public void observe8(HttpServletRequest request, @PathVariable String name) {
         Observation.createNotStarted("observe8", observationRegistry)
             .lowCardinalityKeyValue("name", name)
-            .lowCardinalityKeyValue("uri", request.getRequestURI())
+            .lowCardinalityKeyValue("uri", request.getRequestURL().toString())
             .observe(this::doSomeWorkHere);
     }
 
